@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HER∞</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(160deg, #FFF8F0 0%, #F8E8E0 55%, #EDE3F0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+      /* ── shared ── */
+      .screen {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        height: 100vh;
+        padding: 24px;
+      }
+
+      .screen.hidden {
+        display: none;
+      }
+
+      .logo-badge {
+        position: absolute;
+        top: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .logo-badge img {
+        max-height: 52px;
+        max-width: 180px;
+        width: auto;
+        height: auto;
+        mix-blend-mode: multiply;
+        display: block;
+      }
+
+      .screen-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+    /* ── screen 1 ── */
+    .title {
+      font-size: clamp(64px, 14vw, 120px);
+      font-weight: 700;
+      color: #C9A96E;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      text-shadow:
+        0 0 18px rgba(201, 169, 110, 0.45),
+        0 0 40px rgba(201, 169, 110, 0.25),
+        0 0 70px rgba(201, 169, 110, 0.12);
+    }
+
+    .date {
+      font-size: 13px;
+      font-weight: 400;
+      color: #B0A8A0;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .instruction {
+      font-size: 15px;
+      font-weight: 400;
+      color: #9A9090;
+      letter-spacing: 0.03em;
+    }
+
+    .flower {
+      font-size: clamp(72px, 16vw, 110px);
+      cursor: pointer;
+      display: inline-block;
+      transition: transform 0.25s ease;
+      line-height: 1;
+      margin-top: 4px;
+      filter: drop-shadow(0 4px 16px rgba(201, 169, 110, 0.18));
+    }
+
+    .flower:hover {
+      transform: scale(1.15);
+    }
+
+    /* ── screen 2 ── */
+    .s2-instruction {
+      font-size: clamp(13px, 3.2vw, 15px);
+      font-weight: 400;
+      color: #B0A8A0;
+      max-width: 320px;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+    }
+
+    .counter {
+      font-size: clamp(64px, 18vw, 110px);
+      font-weight: 700;
+      color: #C9A96E;
+      line-height: 1;
+      text-shadow:
+        0 0 18px rgba(201, 169, 110, 0.4),
+        0 0 40px rgba(201, 169, 110, 0.2);
+      transition: text-shadow 0.2s ease;
+    }
+
+    .infinity-wrap {
+      margin-top: 4px;
+    }
+
+    .infinity-wrap svg {
+      width: clamp(240px, 80vw, 320px);
+      height: auto;
+      touch-action: none;
+    }
+
+      /* ── screen 3: reveal ── */
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(201, 169, 110, 0.4);
+      border-radius: 24px;
+      padding: 40px 32px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(201, 169, 110, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      opacity: 0;
+      animation: fadeInCard 400ms ease forwards;
+    }
+
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-message {
+      font-size: 22px;
+      font-weight: 700;
+      color: #5C4A3A;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .btn-another {
+      background: transparent;
+      border: 1.5px solid #C9A96E;
+      color: #C9A96E;
+      border-radius: 100px;
+      padding: 12px 32px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-another:hover {
+      background: #C9A96E;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Screen 1: Welcome -->
+    <div class="screen" id="screen1">
+      <div class="logo-badge"><img src="serco_logo_RGB-1771370207793.png" alt="Serco Informatika" /></div>
+      <div class="screen-content">
+        <h1 class="title">HER∞</h1>
+        <p class="date">Március 8.</p>
+        <p class="instruction">Ez a te napod. Kattints a csokorra!</p>
+        <span class="flower" id="flower">🌸</span>
+      </div>
+    </div>
+
+    <!-- Screen 2: Game -->
+    <div class="screen hidden" id="screen2">
+      <div class="logo-badge"><img src="serco_logo_RGB-1771370207793.png" alt="Serco Informatika" /></div>
+      <div class="screen-content">
+        <p class="s2-instruction">Végtelen okunk van arra, hogy köszönetet mondjunk neked.<br>Játssz, hogy elmondhassunk egyet!</p>
+        <div class="counter" id="counter">0%</div>
+        <div class="infinity-wrap">
+          <svg id="infinity-svg" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background (dim) path -->
+            <path
+              id="path-bg"
+              d="M 160,80 C 160,40 240,10 270,80 C 300,150 220,150 160,80 C 100,10 20,10 50,80 C 80,150 160,120 160,80 Z"
+              stroke="rgba(201,169,110,0.25)"
+              stroke-width="8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            />
+            <!-- Traced (gold) overlay path — dasharray set by JS -->
+            <path
+              id="path-traced"
+              d="M 160,80 C 160,40 240,10 270,80 C 300,150 220,150 160,80 C 100,10 20,10 50,80 C 80,150 160,120 160,80 Z"
+              stroke="#C9A96E"
+              stroke-width="8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+              style="filter: drop-shadow(0 0 6px #C9A96E);"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 3: Reveal -->
+    <div class="screen hidden" id="screen3">
+      <div class="logo-badge"><img src="serco_logo_RGB-1771370207793.png" alt="Serco Informatika" /></div>
+      <div class="screen-content">
+        <div class="glass-card" id="glass-card">
+          <p class="card-message" id="card-message"></p>
+          <button class="btn-another" id="btn-another">Újabb bók?</button>
+        </div>
+      </div>
+    </div>
+
+  <script>
+    // ── Messages ────────────────────────────────────────────────────────
+    const MESSAGES = [
+      'A szakmai tudásod maga az erő – de a mosolyod az amivel igazán megváltoztatsz mindent.',
+      'Minden projekt, amiben ott voltál, egy kicsit jobb lett tőled.',
+      'Nem csak a munkádat, hanem az energiádat is érezzük – és nagyon szükségünk van rá.',
+      'A részletekre való figyelmed csendben tart össze minket.',
+      'Amit te csak megcsinálok-nak hívnál, mások számára hónapokig tartó tanulás lenne.',
+      'A csapat szíve is lehetnél – és sokszor az vagy.',
+      'Nem egyszerűen dolgozol velünk – formálsz minket.',
+      'Minden visszajelzésed, amit adsz, valaki jobb szakemberré tesz.',
+      'A bizonytalanság pillanataiban a te higgadtságod a mi legbiztonságosabb menedékünk.',
+      'A kreativitásod nem véletlen. Az egy döntés – és minden nap meghozod.',
+      'Vannak emberek, akik nélkül egy csapat csak csoport. Te az előbbit teremted meg.',
+      'Ma különösen szeretnénk, ha tudnád: látunk, értékelünk, és örülünk, hogy itt vagy.'
+    ];
+
+    let lastMessageIdx = -1;
+
+    function pickMessage() {
+      let idx;
+      do { idx = Math.floor(Math.random() * MESSAGES.length); }
+      while (idx === lastMessageIdx);
+      lastMessageIdx = idx;
+      return MESSAGES[idx];
+    }
+
+    // ── Show reveal screen ───────────────────────────────────────────────
+    function showReveal() {
+      document.getElementById('screen2').classList.add('hidden');
+      const card = document.getElementById('glass-card');
+      // Re-trigger animation on repeat visits
+      card.style.animation = 'none';
+      // Force reflow
+      void card.offsetWidth;
+      card.style.animation = '';
+      document.getElementById('card-message').textContent = pickMessage();
+      document.getElementById('screen3').classList.remove('hidden');
+    }
+
+    // ── "Újabb bók?" resets to tracing screen ───────────────────────────
+    document.getElementById('btn-another').addEventListener('click', function () {
+      document.getElementById('screen3').classList.add('hidden');
+      document.getElementById('screen2').classList.remove('hidden');
+      resetAndInitTracing();
+    });
+
+    // ── Screen 1 → 2 ────────────────────────────────────────────────────
+    document.getElementById('flower').addEventListener('click', function () {
+      document.getElementById('screen1').classList.add('hidden');
+      document.getElementById('screen2').classList.remove('hidden');
+      resetAndInitTracing();
+    });
+
+    // ── Tracing logic ────────────────────────────────────────────────────
+    let tracingRafId = null;
+
+    function resetAndInitTracing() {
+      if (tracingRafId !== null) {
+        cancelAnimationFrame(tracingRafId);
+        tracingRafId = null;
+      }
+      initTracing();
+    }
+
+    function initTracing() {
+      const svg        = document.getElementById('infinity-svg');
+      const pathBg     = document.getElementById('path-bg');
+      const pathTraced = document.getElementById('path-traced');
+      const counterEl  = document.getElementById('counter');
+
+      const BUCKETS      = 100;
+      const SAMPLE_COUNT = 200;
+      const HIT_PX       = 50;
+      const COMPLETE_PCT = 90;
+
+      const totalLength = pathBg.getTotalLength();
+
+      // 100-bucket boolean coverage array
+      const visited = new Uint8Array(BUCKETS);
+      let visitedCount = 0;
+      let completed    = false;
+
+      // Pre-sample path points once (SVG viewBox units)
+      const samples = new Float32Array(SAMPLE_COUNT * 2);
+      for (let i = 0; i < SAMPLE_COUNT; i++) {
+        const pt = pathBg.getPointAtLength((i / (SAMPLE_COUNT - 1)) * totalLength);
+        samples[i * 2]     = pt.x;
+        samples[i * 2 + 1] = pt.y;
+      }
+
+      // Cache bounding rect; refresh on resize
+      let rect     = svg.getBoundingClientRect();
+      let scaleX   = 320 / rect.width;
+      let scaleY   = 160 / rect.height;
+      let threshSq = (HIT_PX * scaleX) * (HIT_PX * scaleX);
+
+      const onResize = () => {
+        rect     = svg.getBoundingClientRect();
+        scaleX   = 320 / rect.width;
+        scaleY   = 160 / rect.height;
+        threshSq = (HIT_PX * scaleX) * (HIT_PX * scaleX);
+      };
+      window.addEventListener('resize', onResize);
+
+      // Reset dash
+      pathTraced.style.strokeDasharray  = totalLength;
+      pathTraced.style.strokeDashoffset = totalLength;
+      counterEl.textContent = '0%';
+
+      // ── Closest sample index; null if outside threshold ────────────────
+      function closestIndex(cx, cy) {
+        const px = (cx - rect.left) * scaleX;
+        const py = (cy - rect.top)  * scaleY;
+        let best = Infinity, bestIdx = 0;
+        for (let i = 0; i < SAMPLE_COUNT; i++) {
+          const dx = px - samples[i * 2];
+          const dy = py - samples[i * 2 + 1];
+          const d  = dx * dx + dy * dy;
+          if (d < best) { best = d; bestIdx = i; }
+        }
+        return best <= threshSq ? bestIdx : null;
+      }
+
+      // ── Mark bucket ±2 neighbors ───────────────────────────────────────
+      function markVisited(idx) {
+        const center = Math.min(BUCKETS - 1, Math.floor((idx / (SAMPLE_COUNT - 1)) * BUCKETS));
+        for (let d = -2; d <= 2; d++) {
+          const b = center + d;
+          if (b >= 0 && b < BUCKETS && !visited[b]) {
+            visited[b] = 1;
+            visitedCount++;
+          }
+        }
+      }
+
+      // ── RAF loop ───────────────────────────────────────────────────────
+      let displayPct = 0;
+      let pendingX   = null;
+      let pendingY   = null;
+
+      function render() {
+        if (pendingX !== null) {
+          const idx = closestIndex(pendingX, pendingY);
+          if (idx !== null) markVisited(idx);
+          pendingX = null;
+          pendingY = null;
+        }
+
+        const targetPct = visitedCount / BUCKETS;
+        displayPct += (targetPct - displayPct) * 0.14;
+        if (displayPct > targetPct) displayPct = targetPct;
+
+        pathTraced.style.strokeDashoffset = totalLength * (1 - displayPct);
+        counterEl.textContent = Math.min(100, Math.round(displayPct * 100)) + '%';
+
+        if (!completed && targetPct >= COMPLETE_PCT / 100) {
+          completed = true;
+          displayPct = 1;
+          pathTraced.style.strokeDashoffset = 0;
+          counterEl.textContent = '100%';
+          cancelAnimationFrame(tracingRafId);
+          tracingRafId = null;
+          window.removeEventListener('resize', onResize);
+          setTimeout(showReveal, 400);
+          return;
+        }
+
+        tracingRafId = requestAnimationFrame(render);
+      }
+
+      // ── Input handlers ─────────────────────────────────────────────────
+      svg.addEventListener('mousemove', function (e) {
+        if (completed) return;
+        pendingX = e.clientX;
+        pendingY = e.clientY;
+      });
+
+      svg.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+        if (completed) return;
+        pendingX = e.touches[0].clientX;
+        pendingY = e.touches[0].clientY;
+      }, { passive: false });
+
+      tracingRafId = requestAnimationFrame(render);
+    }
+  </script>
+</body>
+</html>
